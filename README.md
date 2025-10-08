@@ -39,3 +39,34 @@ En LaTeX
 * Watermark en texte plutot qu'en image ? 
 * Redondance ? 
 * Voir la section drawbacks du doc 
+
+
+
+# Deadlines
+
+* Etat de l'art de l'article principal d'ici mi novembre
+
+* Algorithme principal implémenté d'ici fin décembre
+
+
+```mermaid
+timeline
+    title PAr 137 : C:TIRIP deadlines
+    Section Octobre 
+    Section Novembre
+        4 Novembre : Etat de l'art de l'article principal fini
+    Section Décembre
+    Section Janvier
+        6 janvier : Etat de l'art complet fini
+        27 janvier : Implémentation de l'algorithme principal finie
+    Section Février
+        10 février : Implémentation des méthodes de comparaison/évaluation finie
+    Section Mars
+        10 mars : comparaison et analyse des résultats obtenus finies
+    Section Avril
+        21 Avril : Amélioration de l'algorithme implémenté
+        21 Avril : Rapport rédigé
+
+```
+
+![Affichage des deadlines](deadlines.png)

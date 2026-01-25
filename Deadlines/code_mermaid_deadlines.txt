@@ -10,7 +10,7 @@ timeline
     Section Février
         10 février : Implémentation des méthodes de comparaison/évaluation finie
     Section Mars
-        10 mars : comparaison et analyse des résultats obtenus finies
+        10 mars : Comparaison et analyse des résultats obtenus finies
     Section Avril
         21 Avril : Amélioration de l'algorithme implémenté
         21 Avril : Rapport rédigé

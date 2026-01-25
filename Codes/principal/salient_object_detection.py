@@ -140,6 +140,22 @@ def step_one(I_filename, W_filename, display=False):
     plt.subplot(223), plt.imshow(somme_laplacienne, cmap='gray'), plt.title('Somme')
     plt.show()
 
+
+    # The fine-enhanced image
+    Ef = somme_laplacienne
+
+    plt.figure()
+    plt.imshow(Ef, cmap='gray')
+    plt.show()
+
+    E = to_uint8((Ec.astype(np.int32) + Ef.astype(np.int32))/2)
+
+    plt.figure()
+    plt.imshow(E, cmap='gray')
+    plt.show()
+
+    return E
+
 # G_sigma : the gradient Gaussian operator
 """What is sigma the std of ?"""
 

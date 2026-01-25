@@ -17,5 +17,5 @@ def dummy_mask(image):
     end_y = center_y + offset_y
 
     mask[start_y : end_y, start_x : end_x] = 1
-         
-    return mask
+
+    return np.repeat(mask[:, :, np.newaxis], 3, axis=2)

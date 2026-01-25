@@ -89,8 +89,8 @@ def watermarking_process(host, watermark, output, alpha=0.04, beta=0.02):
 
     res = np.zeros_like(I)
 
-    F_final = dwt_embed(F_I, F_W, alpha)
-    B_final = dwt_embed(B_I, B_W, beta)
+    F_final = dwt_embed(F_I, F_W_logistic, alpha)
+    B_final = dwt_embed(B_I, B_W_logistic, beta)
 
     res = F_final * mask_3d + B_final * (1 - mask_3d)
 

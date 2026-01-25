@@ -2,8 +2,10 @@ import cv2
 import numpy as np
 import pywt
 import matplotlib.pyplot as plt
+
 from arnold_cat_map import arnold_map
 from logistic_map import apply_logistic_map
+from haar_manipulation import dwt_embed
 
 def dummy_mask(image):
 
@@ -25,21 +27,7 @@ def dummy_mask(image):
          
     return mask
 
-def dwt_embed(host, watermark, param):
 
-    coeffs_h = pywt.dwt2(host, 'haar')
-    LL_h, (LH_h, HL_h, HH_h) = coeffs_h
-
-    coeffs_w = pywt.dwt2(watermark, 'haar')
-    LL_w, _ = coeffs_w
-
-    LL_new = LL_h + (param * LL_w)
-
-    # 4. Reconstruction IDWT
-    coeffs_new = (LL_new, (LH_h, HL_h, HH_h))
-    res = pywt.idwt2(coeffs_new, 'haar')
-
-    return res
 
 
 def watermarking_process(host, watermark, output, alpha=0.04, beta=0.02):

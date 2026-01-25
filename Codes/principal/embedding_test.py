@@ -1,11 +1,16 @@
 import cv2
 import numpy as np
-import pywt
 import matplotlib.pyplot as plt
 
 from arnold_cat_map import arnold_map
 from logistic_map import apply_logistic_map
 from haar_manipulation import dwt_embed
+
+def get_mask(image):
+
+    # A changer à l'occasion, selon la méthode souhaitée
+    return dummy_mask(image)
+
 
 def dummy_mask(image):
 

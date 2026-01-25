@@ -89,14 +89,10 @@ def watermarking_process(host, watermark, output, alpha=0.04, beta=0.02):
 
     res = np.zeros_like(I)
 
-    for k in range(3):
+    F_final = dwt_embed(F_I, F_W, alpha)
+    B_final = dwt_embed(B_I, B_W, beta)
 
-        F_res = dwt_embed(F_I[:, :, k], F_W_logistic[:, :, k], alpha)
-        
-        B_res = dwt_embed(B_I[:, :, k], B_W_logistic[:, :, k], beta)
-
-        res[:, :, k] = (F_res * mask) + (B_res * (1 - mask))
-
+    res = F_final * mask_3d + B_final * (1 - mask_3d)
 
     I_prime = np.clip(res, 0, 255).astype(np.uint8)
 

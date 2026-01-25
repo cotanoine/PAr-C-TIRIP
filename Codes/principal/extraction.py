@@ -2,9 +2,9 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-from arnold_cat_map import arnold_map
-from logistic_map import apply_logistic_map
-from haar_manipulation import dwt_embed
+from arnold_cat_map import arnold_map_inv
+from logistic_map import invert_logistic_map
+from haar_manipulation import dwt_extract
 from dummy_mask import dummy_mask
 
 def get_mask(image):
@@ -16,10 +16,10 @@ def get_mask(image):
 
 
 
-def watermarking_process(host, watermark, output, alpha=0.04, beta=0.02):
+def extraction_process(original_host, watermarked, output, alpha=0.04, beta=0.02):
     
-    I = cv2.imread(host).astype(np.float32)
-    W = cv2.imread(watermark).astype(np.float32)
+    I = cv2.imread(original_host).astype(np.float32)
+    W = cv2.imread(watermarked).astype(np.float32)
 
 
 #--------------------- Application du masque ----------------------------------
@@ -79,28 +79,22 @@ def watermarking_process(host, watermark, output, alpha=0.04, beta=0.02):
 
 #--------------------------- Arnold et mélange -----------------------------
 
-    F_W_arnold = arnold_map(F_W)
-    B_W_arnold = arnold_map(B_W)
+    F_LL = dwt_extract(F_I, F_W, param=alpha)
+
+    B_LL = dwt_extract(B_I, B_W, param=beta)
 
 
-    F_W_logistic = apply_logistic_map(F_W_arnold)
-    B_W_logistic = apply_logistic_map(B_W_arnold)
+    
 
 
-    res = np.zeros_like(I)
-
-    for k in range(3):
-
-        F_res = dwt_embed(F_I[:, :, k], F_W_logistic[:, :, k], alpha)
-        
-        B_res = dwt_embed(B_I[:, :, k], B_W_logistic[:, :, k], beta)
-
-        res[:, :, k] = (F_res * mask) + (B_res * (1 - mask))
+    F_W_logistic = invert_logistic_map(F_LL)
+    B_W_logistic = invert_logistic_map(B_LL)
 
 
-    I_prime = np.clip(res, 0, 255).astype(np.uint8)
+    F_W_arnold = arnold_map_inv(F_W_logistic)
+    B_W_arnold = arnold_map_inv(B_W_logistic)
 
-    cv2.imwrite(output, I_prime)
+    res = F_W_arnold * mask_3d + B_W_arnold * (1 - mask_3d)
 
 
 
@@ -108,4 +102,4 @@ def watermarking_process(host, watermark, output, alpha=0.04, beta=0.02):
 
 if __name__ == "__main__":
 
-    watermarking_process("Images/host.jpg", "Images/watermark.jpg", "Images/output_dummy.png")
+    extraction_process("Images/output_dummy.jpg", "Images/host.jpg", "Images/recovered_watermark.png")

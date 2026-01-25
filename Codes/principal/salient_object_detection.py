@@ -61,7 +61,7 @@ def step_one(I_filename, W_filename, display=False):
     print(f"On a un écart-type {sigma}")
     #print(A_array[400])
 
-    sigma = 2
+    sigma = 1
 
     # The coarse image, convolution of the gaussian gradient operator and A.
     #g = gaussian_gradient_operator_convolutor(A_array,7,sigma=sigma)
@@ -81,14 +81,18 @@ def step_one(I_filename, W_filename, display=False):
     #edges_img.show()
 
 
-    fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+    fig, axes = plt.subplots(2, 2, figsize=(12, 4))
 
-    axes[0].imshow(g, cmap='gray')
-    axes[0].set_title("g, the coarse image")
+    axes[0][0].imshow(A, cmap='gray')
+    axes[0][0].set_title("origine")
 
 
-    axes[1].imshow(epsilon, cmap='gray')
-    axes[1].set_title("epsilon, the coarse edges")
+    axes[0][1].imshow(g, cmap='gray')
+    axes[0][1].set_title("g, the coarse image")
+
+
+    axes[1][0].imshow(epsilon, cmap='gray')
+    axes[1][0].set_title("epsilon, the coarse edges")
 
 
     #Ec_unsaturated = np.int32(g) + 255 - np.int32(epsilon)
@@ -98,8 +102,8 @@ def step_one(I_filename, W_filename, display=False):
     Ec = np.clip(g + 255 - 255*epsilon,0,255).astype(np.uint8)
 
 
-    axes[2].imshow(Ec, cmap='gray')
-    axes[2].set_title("Ec, the enhanced coarse image")
+    axes[1][1].imshow(Ec, cmap='gray')
+    axes[1][1].set_title("Ec, the enhanced coarse image")
 
     plt.show()
 

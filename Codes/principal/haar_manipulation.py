@@ -7,12 +7,21 @@ import cv2
 def scale_to_uint(image):
     mx,mn = image.max(),image.min()
     b_sup,b_inf = min(255,mx),max(0,mn)
-    print(b_sup,b_inf)
-    return (image-mn)*(b_sup-b_inf)//(mx-mn) + b_inf
+    return (image-mn)*(b_sup-b_inf)/(mx-mn) + b_inf
+
+def scale_to_uint2(image,b_inf,b_sup):
+    mx,mn = image.max(),image.min()
+    b_inf = max(b_inf,mn)
+    b_sup = min(b_sup,mx)
+    return ((image.astype(np.float32)-mn)*(b_sup-b_inf)/(mx-mn) + b_inf).astype(np.uint8)
 
     
 
+
+
+
 def dwt_embed(host, watermark, param):
+
 
     res = np.zeros_like(host)
 
@@ -59,13 +68,15 @@ def dwt_extract(host, watermarked, param):
 
 
 
-def dwt_embed2(host, watermark, param):
+def dwt_embed2(host, watermark, param, scale):
+
+    host_scale = scale_to_uint2(host,scale[0],scale[1])
 
     res = np.zeros_like(host)
 
     for k in range(3):
 
-        coeffs_h = pywt.dwt2(host[:, :, k], 'haar')
+        coeffs_h = pywt.dwt2(host_scale[:, :, k], 'haar')
         LL_h, (LH_h, HL_h, HH_h) = coeffs_h
 
         coeffs_w = pywt.dwt2(watermark[:, :, k], 'haar')
@@ -83,13 +94,15 @@ def dwt_embed2(host, watermark, param):
 
     return res
 
-def dwt_extract2(host, watermarked, param):
+def dwt_extract2(host, watermarked, param, scale):
+
+    host_scale = scale_to_uint2(host,scale[0],scale[1])
 
     res = np.zeros_like(host)
 
     for k in range(3):
 
-        LL_original, _ = pywt.dwt2(host[:, :, k], 'haar')
+        LL_original, _ = pywt.dwt2(host_scale[:, :, k], 'haar')
         LL_watermarked, _ = pywt.dwt2(watermarked[:, :, k], 'haar')
 
         LL_extracted = (LL_watermarked - LL_original) / param

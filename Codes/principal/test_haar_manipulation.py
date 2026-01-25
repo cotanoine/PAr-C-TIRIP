@@ -15,13 +15,14 @@ def open_image(filename:str, mode:str="RGB"):
 
 
 
-host = open_image(f"Images/test_images/point.jpg")
-watermark = open_image(f"Images/test_images/pointW.jpg")
+host = open_image(f"Images/test_images/feu.jpg")
+watermark = open_image(f"Images/test_images/feuW.jpg")
 param = 5e-2
+scale = (0,255)
 
 
-res = dwt_embed2(host,watermark,param)
-im2 = dwt_extract2(host,res,param)
+res = dwt_embed2(host,watermark,param,scale)
+im2 = dwt_extract2(host,res,param,scale)
 
 plt.subplot(221),plt.imshow(host),plt.title('Hote')
 plt.subplot(222),plt.imshow(watermark),plt.title('Watermark')

@@ -6,7 +6,7 @@ import numpy as np
 
 if __name__ == "__main__":
 
-    Mon_image = cv2.imread("Images/watermark.jpg").astype(np.float32)
+    Mon_image = cv2.imread("Images/test_images/lyon.png").astype(np.float32)
 
     res = np.zeros_like(Mon_image)
 

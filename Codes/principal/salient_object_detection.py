@@ -61,7 +61,7 @@ def step_one(I_filename, W_filename, display=False):
     print(f"On a un écart-type {sigma}")
     #print(A_array[400])
 
-    sigma = 2
+    sigma = 1
 
     # The coarse image, convolution of the gaussian gradient operator and A.
     #g = gaussian_gradient_operator_convolutor(A_array,7,sigma=sigma)
@@ -81,14 +81,18 @@ def step_one(I_filename, W_filename, display=False):
     #edges_img.show()
 
 
-    fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+    fig, axes = plt.subplots(2, 2, figsize=(12, 4))
 
-    axes[0].imshow(g, cmap='gray')
-    axes[0].set_title("g, the coarse image")
+    axes[0][0].imshow(A, cmap='gray')
+    axes[0][0].set_title("origine")
 
 
-    axes[1].imshow(epsilon, cmap='gray')
-    axes[1].set_title("epsilon, the coarse edges")
+    axes[0][1].imshow(g, cmap='gray')
+    axes[0][1].set_title("g, the coarse image")
+
+
+    axes[1][0].imshow(epsilon, cmap='gray')
+    axes[1][0].set_title("epsilon, the coarse edges")
 
 
     #Ec_unsaturated = np.int32(g) + 255 - np.int32(epsilon)
@@ -98,8 +102,8 @@ def step_one(I_filename, W_filename, display=False):
     Ec = np.clip(g + 255 - 255*epsilon,0,255).astype(np.uint8)
 
 
-    axes[2].imshow(Ec, cmap='gray')
-    axes[2].set_title("Ec, the enhanced coarse image")
+    axes[1][1].imshow(Ec, cmap='gray')
+    axes[1][1].set_title("Ec, the enhanced coarse image")
 
     plt.show()
 
@@ -188,7 +192,54 @@ step_one(My_image, My_watermark, display=True)
 # m : size (nb_patches, height_pixels), such that m[j][x] represents the set of pixels of the j-th patch on the x-th row
 
 
+"""
+Ok NO, basically you have to update the arrays m[j][x] with values of a gaussian sum
+but the document doesn't make any sense in how you update each cell
+"""
+
+#-------------------------------------------------------------------------------
+#                               Step 4
+#-------------------------------------------------------------------------------
+
+# M : the image represented by the union of the patches (the m[j])
+
+# Apply H1 =  [1, 1, 0, 1, 1;        then H2 = [1, 0, 1;
+#              1, 0, 0, 0, 1;                   0, 0, 0;
+#              0, 0, 0, 0, 0;                   1, 0, 1]
+#              1, 0, 0, 0, 1;
+#              1, 1, 0, 1, 1]
+#
+# M_prime : the result of convolution(convolution(M,H1),H2)
+
+# Update the (values) of patches m[j] as the value of M_prime at spot m[j]
+
+# While there are more patches than the predefined threshold tau_nu 
+        # theta : such that m[theta] has the least pixels of all the m[j]
+
+        # Identify the adjacent patches
+
+        # Merge m[theta] with the largest adjacent patch m[lambda_theta]:
+"""     Do we define m as a dictionnary of arrays for simplicity ? """
+
+# M : output of this step
+""" Should have at most tau_nu colors"""
 
 
+#-------------------------------------------------------------------------------
+#                               Step 5
+#-------------------------------------------------------------------------------
+
+# M = 255 - M
+
+# Apply H3 = 1/13 * [1, 1, 0, 1, 1;         then H4 = 1/10 *  [2, 0, 2; 
+#                    1, 0, 0, 0, 1;                            0, 2, 0;
+#                    0, 0, 1, 0, 0;                            2, 0, 2]
+#                    1, 0, 0, 0, 1;
+#                    1, 1, 0, 1, 1]
+#
+# S: Saliency map = convolution(convolution(M,H3),H4)
+
+# Sigma : the binary segmentation mask, ie, the pixels 
+#         where S is higher than the predefined threshold tau_s
 
 

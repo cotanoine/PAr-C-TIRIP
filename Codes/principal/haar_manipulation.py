@@ -87,7 +87,7 @@ def dwt_embed2(host, watermark, param, scale):
         # 4. Reconstruction IDWT
         coeffs_new = (LL_new, (LH_h, HL_h, HH_h))
 
-        res_k = pywt.idwt2(coeffs_new, 'haar')
+        res_k = pywt.idwt2(coeffs_new, 'haar').astype(np.uint8)
         res_k = cv2.resize(res_k, (host.shape[1], host.shape[0]))
 
         res[:, :, k] = res_k
@@ -110,7 +110,7 @@ def dwt_extract2(host, watermarked, param, scale):
         zeros = np.zeros_like(LL_extracted)
         coeffs_extracted = (LL_extracted, (zeros, zeros, zeros))
 
-        res_k = pywt.idwt2(coeffs_extracted, 'haar')
+        res_k = pywt.idwt2(coeffs_extracted, 'haar').astype(np.uint8)
         res_k = cv2.resize(res_k, (host.shape[1], host.shape[0]))
 
         res[:, :, k] = res_k

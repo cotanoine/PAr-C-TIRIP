@@ -18,7 +18,7 @@ def open_image(filename:str, mode:str="RGB"):
 host = open_image(f"Images/test_images/feu.jpg")
 watermark = open_image(f"Images/test_images/feuW.jpg")
 param = 5e-2
-scale = (10,250)
+scale = (0,255)
 
 
 res = dwt_embed2(host,watermark,param,scale)

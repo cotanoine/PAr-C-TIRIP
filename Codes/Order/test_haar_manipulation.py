@@ -1,13 +1,7 @@
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
 
+from image_processing import *
 from haar_manipulation import *
 
-def open_image(filename:str, mode:str="RGB"):
-    im = Image.open(filename).convert(mode=mode)
-    px = np.asarray(im)
-    return px
 
 
 
@@ -16,14 +10,21 @@ watermark = open_image(f"Images/test_images/feuW.jpg")
 param = 5e-2
 
 
-res = apply_dwt(host,watermark,param)
-im2 = reverse_dwt(host,res,watermark,param)
+image_watermarked = apply_dwt(host,watermark,param)
+watermark_extracted = reverse_dwt(host,image_watermarked,host,param)
+
+
+
+
+# ----------------------------------
+
+aSSIM(watermark,watermark_extracted)
+
+import matplotlib.pyplot as plt
 
 plt.subplot(221),plt.imshow(host),plt.title('Hote')
 plt.subplot(222),plt.imshow(watermark),plt.title('Watermark')
-plt.subplot(223),plt.imshow(res),plt.title('embed')
-plt.subplot(224),plt.imshow(im2),plt.title('extract')
+plt.subplot(223),plt.imshow(image_watermarked),plt.title('embed')
+plt.subplot(224),plt.imshow(watermark_extracted),plt.title('extract')
 plt.show()
 
-plt.imshow(np.abs(watermark-im2))
-plt.show()

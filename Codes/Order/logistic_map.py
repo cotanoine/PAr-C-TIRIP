@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
+
 
 def logisticmap(f, d_0, length):
     d = [f*d_0*(1-d_0)]

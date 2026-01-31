@@ -1,7 +1,7 @@
 import numpy as np
 import random
 
-M = 256
+M = 512
 
 def apply_arnold_map(image, M = M, c = (1,1,1,1)):
 

@@ -4,7 +4,7 @@ from arnold_cat_map import *
 
 
 
-im = open_image(f"Images/test_images/feu.jpg")
+im = open_image(f"Images/test_images/feuW.jpg")
 
 im_catted = apply_arnold_map(im)
 im_recover = reverse_arnold_map(im_catted)

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def dummy_mask(image):
 
     h, w = image.shape[:2]

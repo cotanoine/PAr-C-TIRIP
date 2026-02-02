@@ -13,11 +13,14 @@ def open_image(filename:str, mode:str="RGB"):
 
 def fusion(foreground,background,mask):
     res = foreground * mask + background * (1 - mask)
-    return np.clip(res, 0, 255).astype(np.uint8)
+    return np.clip(res, 0, 255)
 
 
 def aSSIM(img1,img2):
     value = compare_ssim(Image.fromarray(img1, 'RGB'), Image.fromarray(img2, 'RGB'))
     print(f"\033[32m~~~ aSSIM = {100*value:.2f}% ~~~\033[0m")
+
+def aSSIM_value(img1,img2):
+    return compare_ssim(Image.fromarray(img1, 'RGB'), Image.fromarray(img2, 'RGB'))
 
 

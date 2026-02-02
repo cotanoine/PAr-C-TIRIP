@@ -18,19 +18,21 @@ def apply_logistic_map(image, mask, f = f, d_0 = d_0):
     nz = 0
     for i in range(H):
         for j in range(W):
-            if (mask[i,j] == [0,0,0]).all():
+            if mask[i,j,0] == 0:
                 nz += 1
+
+    print(nz)
 
     d = logisticmap(f, d_0, H*W-nz)
     p = np.argsort(d)
     # p contient les permutations pour re-ordonner dans le "désordre"
     
 
-    image_flat = np.zeros((1,H*W-nz,3)).astype(np.uint8)
+    image_flat = np.zeros((1,H*W-nz,3))
     indice = 0
     for i in range(H):
         for j in range(W):
-            if not (mask[i,j] == [0,0,0]).all():
+            if not mask[i,j,0] == 0:
                 image_flat[0,indice,:] = image[i,j]
                 indice += 1
     # On aplatit notre matrice n*m en une ligne 1*mn
@@ -38,17 +40,17 @@ def apply_logistic_map(image, mask, f = f, d_0 = d_0):
     image_flat = image_flat[:,p,:]
     # On ordonne les termes sur notre ligne
     
-    res = np.zeros_like(image).astype(np.uint8)
+    res = np.zeros_like(image)
 
     indice = 0
     for i in range(H):
         for j in range(W):
-            if not (mask[i,j] == [0,0,0]).all():
+            if not mask[i,j,0] == 0:
                 res[i,j,:] = image_flat[0,indice,:]
                 indice += 1   
     # On reconstruit la matrice n*m
 
-    return res.astype(np.uint8)
+    return res
 
 
 def reverse_logistic_map(scrambled_image, mask, f = f, d_0 = d_0):
@@ -67,11 +69,11 @@ def reverse_logistic_map(scrambled_image, mask, f = f, d_0 = d_0):
     # p contient les permutations pour re-ordonner dans le "désordre"
 
 
-    scrambled_image_flat = np.zeros((1,H*W-nz,3)).astype(np.uint8)
+    scrambled_image_flat = np.zeros((1,H*W-nz,3))
     indice = 0
     for i in range(H):
         for j in range(W):
-            if not (mask[i,j] == [0,0,0]).all():
+            if not mask[i,j,0] == 0:
                 scrambled_image_flat[0,indice,:] = scrambled_image[i,j]
                 indice += 1
     # On aplatit notre matrice n*m en une ligne 1*mn
@@ -85,12 +87,12 @@ def reverse_logistic_map(scrambled_image, mask, f = f, d_0 = d_0):
     indice = 0
     for i in range(H):
         for j in range(W):
-            if not (mask[i,j] == [0,0,0]).all():
+            if not mask[i,j,0] == 0:
                 res[i,j,:] = scrambled_image_flat[0,indice,:]
                 indice += 1   
     # On reconstruit la matrice n*m
 
-    return res.astype(np.uint8)
+    return res
 
 
 

@@ -15,12 +15,12 @@ from blind import *
 
 alpha,beta = 0.04,0.02
 
-host = open_image(f"Images/test_images/feu.jpg")
-watermark = open_image(f"Images/test_images/feuW.jpg")
-watermark = cv2.resize(watermark, (host.shape[1],host.shape[0]))
+host = open_image(f"Images/test_images/feu.jpg").astype(np.float16)
+watermark = scale_to_uint2(open_image(f"Images/test_images/feuW.jpg").astype(np.uint8),10,240).astype(np.float16)
+watermark = cv2.resize(watermark, (host.shape[1],host.shape[0])).astype(np.float16)
 
-mask = dummy_mask(host)
-
+mask = dummy_mask(host).astype(np.float16)
+mask = open_image(f"Images/test_images/water.jpg").astype(np.float16)
 
 
 # --------------------
@@ -52,8 +52,6 @@ B_Iw = I_prime * (1-mask)
 
 I_blind = I_approximated(I_prime,I_prime)
 
-aSSIM(host,I_blind)
-
 I_blind = host
 
 F_I_recover = I_blind * mask
@@ -72,9 +70,10 @@ W_prime = fusion(F_W_recover,B_W_recover,mask)
 
 # --------------------
 
-aSSIM(W_prime,watermark)
+aSSIM(W_prime.astype(np.uint8),watermark.astype(np.uint8))
 
 import matplotlib.pyplot as plt
-plt.subplot(121),plt.imshow(watermark)
-plt.subplot(122),plt.imshow(W_prime)
+
+plt.subplot(121),plt.imshow(watermark.astype(np.uint8))
+plt.subplot(122),plt.imshow(W_prime.astype(np.uint8))
 plt.show()

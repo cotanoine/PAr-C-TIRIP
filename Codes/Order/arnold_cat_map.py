@@ -1,7 +1,7 @@
 import numpy as np
 import random
 
-M = 512
+M = 255
 
 def apply_arnold_map(image, M = M, c = (1,1,1,1)):
 
@@ -21,7 +21,7 @@ def apply_arnold_map(image, M = M, c = (1,1,1,1)):
         for j in range(W):
             res[i,j] = (Gamma @ image[i,j] ) % M
 
-    return res.astype(np.uint8)
+    return res
 
 
 def reverse_arnold_map(image, M = M, c = (1,1,1,1)):
@@ -43,4 +43,4 @@ def reverse_arnold_map(image, M = M, c = (1,1,1,1)):
         for j in range(W):
             res[i,j] = (Gamma_inv @ image[i,j] ) % M
 
-    return res.astype(np.uint8)
+    return res

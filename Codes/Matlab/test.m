@@ -13,16 +13,16 @@ d_0 = 0.5;
 alpha = 0.04;
 beta = 0.02;
 
-I = imread("Images/test_images/feu.jpg");
-W = imread("Images/test_images/feuW.jpg");
-Mask = imread("Images/test_images/water.jpg")/255;
+I = imread("Images/article/1.png");
+W = imread("Images/article/55.png");
+Mask = imread("Images/article/m.png");
 
 [a,b,c] = size(I);
 
 
 
-J = apply_haar(I,W,alpha);
+I_haar = round(apply_haar(I,W,alpha));
+W_prime = reverse_haar(I,I_haar,alpha);
 
-E = reverse_haar(I,J,W,alpha);
-
-ssim(uint8(W),uint8(E))
+imshow([W,W_prime])
+ssim(W,W_prime)

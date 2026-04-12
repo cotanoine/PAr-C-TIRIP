@@ -5,9 +5,9 @@ function [E] = reverse_haar(I, J, param)
 %[~,Wh,Wv,Wd] = haart2(W);
 
 Ea = (Ja - Ia)./param;
-Eh = (Jh - Ih)./param;
-Ev = (Jv - Iv)./param;
-Ed = (Jd - Id)./param;
+Ea = (Jh - Ih)./param;
+Ea = (Jv - Iv)./param;
+Ea = (Jd - Id)./param;
 
 E = uint8(ihaart2(Ea,Eh,Ev,Ed));
 

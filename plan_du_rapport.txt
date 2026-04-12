@@ -1,0 +1,74 @@
+1- Introduction
+2- État de l'art
+	-> L'histoire des tatouages numériques
+	-> Comment décrire un tatouage
+3- Notre étude
+	-> Présentation de l'article
+	-> Explication de notre projet
+4- Méthodologie
+	-> Résumé de la méthodologie
+	-> Expliquer la création du masque
+	-> Expliquer la matrice Arnold
+	-> Expliquer la suite logistique
+	-> Expliquer haar
+	-> Expliquer blind
+5- Expérience
+	-> Expérience et discussion sur le masque
+	-> Expérience et discussion sur l'ecriture du tatou
+	-> Expérience et discussion sur la lecture du tatou
+6- Amélioration
+	-> Améliorer le masque ?
+	-> Améliorer la matrice d'anorld ?
+	-> Améliorer la suite logistique ?
+	-> Améliorer haar ?
+7- Étude des Résultats
+	-> Résultats
+	-> Discussion
+8- Au dela de l'article
+	-> Discussion sur d'autre méthode possible
+9- Conclusion
+
+
+
+-------------------------------------------------------------
+
+Explication plus en détail des parties :
+
+1- Doit être une intro de notre rapport complet (donc introduire les tatouages et la méthode)
+
+2- État de l'art, pas plus à dire
+
+3- Ici on doit juste présenter l'article en ne donnant les infos qu'on ne dira pas plus loin. Enfin il faudra expliquer ce à quoi notre projet sert. Il est primordiale que cette partie soit EXTREMEMENT bien écrite car si un lecteur ne comprend pas cela il va pas comprendre ce qu'il lit après car ne vas pas comprendre la raison de notre étude
+
+4- On explique en détail TOUTE la méthodologie. Quand je dis tout ça veut dire : introduire le concept, expliquer son but, si possible schématiser de façon pédagogique ce qu'il fait, puis dans un second temps aller plus en détail dedans et même prouver mathématiquement que ça fonctionne. Dans cette partie il ne faut pas : 1/ Appliquer un exemple sur une image et 2/ Parler des incohérences trouvé dans l'article à ce sujet. Ces 2 points seront traités plus tard dans le rapport, mais à ce stade là il ne faut pas perdre le lecteur avec des problématique pas encore présenté. En résumé, présenter chaque étape comme elle doit marcher dans la théorie, mettre au pire des illustrations théoriques (comme pour le masque de l'article, si tu veux tu peux utiliser des images théoriques de résultats de l'algo, pas des images que tu as générer avec l'algo), et présenter les choses comme l'article (donc au début, M=512 et tg par exemple).
+C'est beaucoup de blabla mais j'ai le sentiment que c'est la partie la plus importante de notre rapport et qu'il ne faut pas rater le coche. Il faut réussir à expliquer que dans un premier temps tout semble si parfait et même donne un sentiment que tout ça va marcher, pour que la suite soit aussi impactante que cela a été pour nous. On a le droit d'expliquer à ce moment là que certain point sont flous, mais pas plus.
+petite aide pour la théorie du masque. Si il y a des parties que tu n'arrives pas à expliquer dans la théorie, check les articles 44 et 45 référencés, ils sont écrit par les mêmes auteurs et c'est limite des ctrl-c ctrl-v sur beaucoup point, à la différence où ils expliquent plus en détail leur méthode, dont la création du masque. Si ça peut t'aider à écrire cette partie.
+
+5- C'est à ce moment là où on fait run notre code et on se prend une claque. Montrer les images que renvoient nos algo et commencer une discussion sur la cause de l'échec. Pour le masque présenter le masque généré. Pour l'écriture présenter l'image tatouée, pour la lecture présenter le tatouage (illisible). Il est important pour cette partie de mettre tous nos paramètre dans l'état le plus ressemblant à l'article, sans aucune amélioration whatsoever.
+Dans le fichier Images/article j'ai mis sous forme de numéro 4 images de test de l'article (celles que j'ai réussi à retrouver sur le net, les 4 autres sont des LostMédias pour moi après plusieurs heures de recherche). Ne pas hésiter à se servir de ses images. (l'image 55 est plus une image qui me tient à cœur donc si tu veux l'utiliser pour un test vas-y, juste faut faire attention à n'utiliser que les images de l'article quand on voudra faire une comparaison des performances avec l'article). Bref on peut commencer dans cette partie à expliquer les points qui nous gênes avec l'article de base
+
+6- Maintenant on présente tous nos problèmes et comment on fait pour les régler. Attention à cependant rester dans les limites de l'article.
+
+7- On présente les nouveaux résultats que l'on a et on discute sur cela. (comme le fait que l'article à des résultats digne d'un dieu mais oklm)
+
+8- On sort des limites de l'article pour chercher d'autres méthodes (juste expliquer ces méthodes ou donner des résultats si jamais ça a été implémenté)
+
+9- Conclusion sur notre rapport et projet
+
+
+
+
+
+Note:
+Je rappel que c'est juste mon croquis du rapport selon ce que moi j'ai étudié et cassé mon crâne. N'hésites pas à rajouter/modifier des éléments selon tes propres recherches. Juste essaie de rester cohérent avec mon plan générale ou propose en un autre si jamais.
+
+
+
+
+
+
+
+
+
+
+

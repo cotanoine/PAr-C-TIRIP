@@ -1,0 +1,41 @@
+function [J] = apply_haar2(I, W, param, A, M)
+
+[Ia,Ih,Iv,Id] = haart2(I,1);
+[Wa,Wh,Wv,Wd] = swt2(W,1,'haar');
+
+
+l = size(Ia,1);
+h = size(Ia,2);
+Wa = resize(Wa, [l h]);
+Wh = resize(Wh, [l h]);
+Wv = resize(Wv, [l h]);
+Wd = resize(Wd, [l h]);
+
+Wa_prime = Wa;
+Wh_prime = Wh;
+Wv_prime = Wv;
+Wd_prime = Wd;
+
+
+
+for x=1:l
+    for y=1:h
+        for k=1:3
+            v = Wa(x,y,k);
+            
+        end
+    end
+end
+
+
+Ja = Ia + param*Wa;
+Jh = Ih + param*Wh;
+Jv = Iv + param*Wv;
+Jd = Id + param*Wd;
+
+l = size(I,1);
+h = size(I,2);
+
+J = imresize(iswt2(Ja,Jh,Jv,Jd,'haar'), [l h]);
+
+end

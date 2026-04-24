@@ -2,28 +2,35 @@
 from image_processing import *
 from haar_manipulation import *
 
-
-
-
-host = open_image(f"Images/test_images/feu.jpg")
-watermark = open_image(f"Images/test_images/feuW.jpg")
-param = 5e-2
-
-
-
-image_watermarked = apply_dwt(host,watermark,param)
-
-watermark_extracted = reverse_dwt(host,image_watermarked,watermark,param)
-
-
-# ----------------------------------
-
-aSSIM(watermark,watermark_extracted)
+import math
 
 import matplotlib.pyplot as plt
 
+param = 0.02
+
+host = open_image(f"Images/article/55.png")
+watermark = open_image(f"Images/article/C.png")
+
+image_watermarked = apply_dwt(host,watermark,param,'haar')
+
+
+image_watermarked_scaled = scale_to_uint(np.astype(image_watermarked,np.uint8),host)
+image_watermarked = np.astype(image_watermarked,np.uint8)
+
+print(watermark.max())
+plt.imshow(image_watermarked_scaled)
+plt.show()
+
+watermark_extracted_scaled = reverse_dwt(host,image_watermarked_scaled,watermark,param,'haar')
+watermark_extracted = reverse_dwt(host,image_watermarked,watermark,param,'haar')
+
+
+
+
+
 plt.subplot(221),plt.imshow(host),plt.title('Hote')
 plt.subplot(222),plt.imshow(watermark),plt.title('Watermark')
-plt.subplot(223),plt.imshow(image_watermarked),plt.title('embed')
-plt.subplot(224),plt.imshow(watermark_extracted),plt.title('extract')
+plt.subplot(223),plt.imshow(watermark_extracted_scaled),plt.title('Extraction avec remise à l\'échelle')
+plt.subplot(224),plt.imshow(watermark_extracted),plt.title('Extraction')
 plt.show()
+

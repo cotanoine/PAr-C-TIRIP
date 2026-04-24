@@ -9,7 +9,7 @@ Eh = (Jh - Ih)./param;
 Ev = (Jv - Iv)./param;
 Ed = (Jd - Id)./param;
 
-E = uint8(ihaart2(Ea,Eh,Ev,Ed));
+E = uint8(ihaart2(Ea,1*Eh,1*Ev,1*Ed));
 
 %E = (J-I)/param;
 

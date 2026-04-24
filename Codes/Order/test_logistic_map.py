@@ -6,7 +6,7 @@ from logistic_map import *
 
 im = open_image(f"Images/test_images/feu.jpg")
 mask = np.zeros_like(im)+1
-mask = open_image(f"Images/test_images/water.jpg")
+mask = open_image(f"Images/test_images/B.png")
 
 im_shuffle = apply_logistic_map(im,mask)
 im_recover = reverse_logistic_map(im_shuffle,mask)

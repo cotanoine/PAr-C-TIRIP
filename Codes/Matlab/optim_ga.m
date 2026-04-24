@@ -1,4 +1,4 @@
-options = optimoptions('ga','PopulationSize',10,'MaxGeneration',100, ...
+options = optimoptions('ga','PopulationSize',1,'MaxGeneration',100, ...
                        'Display','iter','PlotFcn', {@gaplotbestf,@gaplotbestindiv});
 
 nvars=2;
@@ -8,9 +8,10 @@ A = [];
 b = [];
 Aeq = [];
 beq = [];
-lb = [0.01,0.01];
-ub = [0.2,0.2];
+lb = [0,0];
+ub = [4,1];
 nonlcon = [];
+%intcon = [1,2,3,4];
 
 [x,fval] = ga(fun,nvars,A,b,Aeq,beq,lb,ub,nonlcon,options);
 

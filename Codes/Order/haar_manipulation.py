@@ -4,9 +4,9 @@ import cv2
 
 
 
-def scale_to_uint(image):
+def scale_to_uint(image,image_ref):
     mx,mn = image.max(),image.min()
-    b_sup,b_inf = min(255,mx),max(0,mn)
+    b_sup,b_inf = image_ref.max(),image_ref.min()
     return (image-mn)*(b_sup-b_inf)/(mx-mn) + b_inf
 
 def scale_to_uint2(image,b_inf,b_sup):
@@ -20,7 +20,7 @@ wavelet = "haar"
 
 
 
-def apply_dwt(host, watermark, param):
+def apply_dwt(host, watermark, param, wavelet):
 
 
     res = np.zeros_like(host).astype(np.float32)
@@ -45,7 +45,7 @@ def apply_dwt(host, watermark, param):
 
     return res
 
-def reverse_dwt(host, watermarked, watermark, param):
+def reverse_dwt(host, watermarked, watermark, param, wavelet):
 
     res = np.zeros_like(host)
 

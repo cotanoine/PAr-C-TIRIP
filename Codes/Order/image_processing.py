@@ -21,6 +21,7 @@ def aSSIM(img1,img2):
     print(f"\033[32m~~~ aSSIM = {100*value:.2f}% ~~~\033[0m")
 
 def aSSIM_value(img1,img2):
-    return compare_ssim(Image.fromarray(img1, 'RGB'), Image.fromarray(img2, 'RGB'))
+    value = compare_ssim(Image.fromarray(img1, 'RGB'), Image.fromarray(img2, 'RGB'))
+    return value
 
 
